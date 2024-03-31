@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const validator = require('validator');
 
 const userSchema = new mongoose.Schema({
@@ -28,6 +27,7 @@ const userSchema = new mongoose.Schema({
         select: false
     },
     avatar: String,
+    googleAvatar: Boolean,
     followers: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -47,9 +47,10 @@ const userSchema = new mongoose.Schema({
         }
     ],
     // nextStream: 
-    timestamps: { 
-        createdAt: true, 
-        updatedAt: false 
+},{
+    timestamps: {
+        createdAt: true,
+        updatedAt: false
     }
 })
 
@@ -63,11 +64,5 @@ userSchema.methods.passwordCompare = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
-userSchema.methods.createJwt = async function () {
-    const token = await jwt.sign({ id: this._id }, process.env.JWT_SECRET_KEY);
-    this.tokens = this.tokens.concat({ token });
-    await this.save();
-    return token;
-};
 
 module.exports = mongoose.model('user', userSchema)

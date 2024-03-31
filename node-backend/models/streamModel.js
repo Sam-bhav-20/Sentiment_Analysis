@@ -19,7 +19,7 @@ const streamSchema = new mongoose.Schema({
     chats: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'chat',
+            ref: 'message',
         }
     ]
 })

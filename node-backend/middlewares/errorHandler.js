@@ -40,6 +40,6 @@ module.exports = (err, req, res, next) => {
     }
     else{
         console.log(err);
-        res.json(err);
+        res.json({err: err.message})
     }
 };
