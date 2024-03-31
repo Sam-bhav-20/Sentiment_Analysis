@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
             select: false,
         },
         avatar: String,
-        googleAvatar: Boolean,
+        googleAvatar: String,
         followers: [
             {
                 type: mongoose.Schema.Types.ObjectId,
