@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const streamSchema = new mongoose.Schema({
     streamer: {
@@ -7,11 +7,11 @@ const streamSchema = new mongoose.Schema({
     },
     likes: {
         type: Number,
-        default: 0
+        default: 0,
     },
     views: {
         type: Number,
-        default: 0
+        default: 0,
     },
     maxViews: Number,
     positive: Number,
@@ -20,8 +20,8 @@ const streamSchema = new mongoose.Schema({
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'message',
-        }
-    ]
-})
+        },
+    ],
+});
 
-module.exports = mongoose.model('stream', streamSchema)
+module.exports = mongoose.model('stream', streamSchema);

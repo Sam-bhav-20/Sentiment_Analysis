@@ -23,23 +23,18 @@ module.exports = (err, req, res, next) => {
     if (err.name === 'JsonWebTokenError')
         err = new customError('Please login to access', 400);
 
-    
-    if(process.env.NODE_ENV == 'production'){
+    if (process.env.NODE_ENV == 'production') {
         // Other Errors
-        if(!err.operational){
-            err = {...err,
-                message: "Something went wrong",
-                statuscode: 500
-            }
+        if (!err.operational) {
+            err = { ...err, message: 'Something went wrong', statuscode: 500 };
         }
         res.status(err.statuscode).json({
             status: 'fail',
             message: err.message,
             error: err,
         });
-    }
-    else{
+    } else {
         console.log(err);
-        res.json({err: err.message})
+        res.json({ err: err.message });
     }
 };
