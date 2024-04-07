@@ -5,23 +5,21 @@ const streamSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
     },
-    likes: {
-        type: Number,
-        default: 0,
-    },
-    views: {
-        type: Number,
-        default: 0,
+    thumbnail: String,
+    thumbUrl: String,
+    heldOn: {
+        type: Date,
+        default: new Date(),
+        validate: {
+            validator: v => {
+                return v.getTime() >= Date.now();
+            },
+            message: 'Enter valid a date for your stream',
+        },
     },
     maxViews: Number,
     positive: Number,
     negative: Number,
-    chats: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'message',
-        },
-    ],
 });
 
 module.exports = mongoose.model('stream', streamSchema);
